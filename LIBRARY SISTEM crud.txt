@@ -1,0 +1,245 @@
+===Anggota===
+CREATE PROCEDURE insertDataAnggota(
+    IN_idAnggota varchar(5),
+    IN_namaAnggota varchar(100),
+    IN_alamatAnggota varchar(150),
+    IN_emailAnggota varchar(25),
+    IN_noHPAnggota varchar(13),
+    IN_membershipStartDate Date,
+    IN_membershipExpiredDate Date
+)
+BEGIN
+    INSERT INTO anggota
+    VALUES(IN_idAnggota, IN_namaAnggota, IN_alamatAnggota, IN_emailAnggota, IN_noHPAnggota, IN_membershipStartDate, IN_membershipExpiredDate);
+END;
+
+CALL insertDataAnggota('21001', 'Joko Tingkir', 'Jl. Sukamaju RT. 12 No. 44 Malang, Jawa Timur', 'joko123@gmail.com', '081234567890', '2020-01-01', '2021-01-01');
+CALL insertDataAnggota('21002', 'Slamet Rahayu', 'Jl. Lima Sekawan RT. 16 RW. 17 No. 29 Malang, Jawa Timur', 'slametok@yahoo.co.id', '08113353578', '2020-02-10', '2021-02-10');
+CALL insertDataAnggota('21003', 'Adinda Mulia Putri', 'Jl. Desa Putih RT. 10 No. 23 Malang, Jawa Timur', 'adinmulchan@gmail.com', '082136633779', '2020-12-12', '2021-12-12');
+
+CREATE PROCEDURE updateDataAnggota(
+    IN p_idAnggota varchar(5),
+    IN up_noHPAnggota varchar(13)
+)
+BEGIN
+    UPDATE anggota SET NO_HP = up_noHPAnggota
+    WHERE ID_ANGGOTA = p_idAnggota;
+END;
+
+CALL updateDataAnggota('21002', '081133535786');
+
+CREATE PROCEDURE deleteDataAnggota(
+    dr_idAnggota varchar(5)
+)
+BEGIN
+    DELETE from anggota
+    WHERE ID_ANGGOTA = dr_idAnggota;
+END;
+
+CALL deletedataAnggota('19515');
+
+CREATE PROCEDURE showDataAnggota(
+  IN in_idAnggota varchar(5)  
+)  
+BEGIN 
+    SELECT ID_ANGGOTA, NAMA_ANGGOTA, ALAMAT_ANGGOTA, EMAIL_ANGGOTA, NO_HP, MEMBERSHIP_START_DATE, MEMBERSHIP_EXPIRED_DATE from anggota 
+    WHERE ID_ANGGOTA = in_idAnggota; 
+END;
+
+
+===PENERBIT===
+CREATE PROCEDURE insertDataPenerbit(
+	in_idPenerbit varchar(5),
+	in_namaPenerbit varchar(100),
+	in_alamatPenerbit varchar(150)
+)
+BEGIN
+	INSERT INTO penerbit
+	VALUES(in_idPenerbit, in_namaPenerbit, in_alamatPenerbit);
+END;
+
+call insertDataPenerbit ('78901', 'PT Gramedia Pustaka Utama', 'Jl. Palmerah Barat 29-37. Jakarta 10270');
+call insertDataPenerbit ('78902', 'Penerbit Mizan', 'Jln. Cinambo 135. Cisaranten Wetan, Bandung 40294');
+call insertDataPenerbit ('78903', 'Gagas Media', 'Jalan Haji Montong No. 57, Ciganjur, Jagakarsa, Jakarta Selatan, DKI 12630');
+
+CREATE PROCEDURE updateDataPenerbit (
+	IN p_idPenerbit varchar(5),
+   	IN up_namaPenerbit varchar(100)
+)
+BEGIN
+	UPDATE penerbit set NAMA_PENERBIT = up_namaPenerbit
+    	WHERE ID_PENERBIT = p_idPenerbit;
+END;
+
+CREATE PROCEDURE deleteDataPenerbit(
+	dr_idPenerbit varchar(5)
+)
+BEGIN
+	DELETE from penerbit
+	where ID_PENERBIT = dr_idPenerbit;
+END;
+
+CREATE PROCEDURE showDataPenerbit( 
+    IN in_idPenerbit varchar(5) 
+) 
+BEGIN 
+	SELECT ID_PENERBIT, NAMA_PENERBIT, ALAMAT_PENERBIT from penerbit 
+    WHERE ID_PENERBIT = in_idPenerbit; 
+END;
+
+CALL showDataPenerbit('78903');
+
+===Petugas===
+CREATE PROCEDURE insertDataPetugas(
+    in_idPetugas varchar(5),
+    in_namaPetugas varchar(100)
+)
+BEGIN
+    INSERT INTO petugas
+    VALUES (in_idPetugas, in_namaPetugas);
+END;
+
+call insertDataPetugas ('19001','Hanifa Putri Rahima');
+call insertDataPetugas ('19002','Marchenda Fayza Madjid');
+call insertDataPetugas ('19003','Joko Tarub');
+
+CREATE PROCEDURE updateDataPetugas (
+	in p_idPetugas varchar(5),
+    in up_namaPetugas varchar(100)
+)
+BEGIN
+	update PETUGAS set NAMA_PETUGAS = up_namaPetugas
+    where ID_PETUGAS = p_idPetugas;
+END;
+
+create procedure deleteDataPetugas (
+	dr_namaPetugas varchar(100)
+)
+BEGIN
+	delete from PETUGAS 
+    where NAMA_PETUGAS = dr_namaPetugas;
+END;
+
+create procedure showDataPetugas (
+	IN in_idPetugas varchar(5)
+)
+
+BEGIN
+	select ID_PETUGAS, NAMA_PETUGAS 
+    from PETUGAS
+    where ID_PETUGAS = in_idPETUGAS;
+END;
+
+===BUKU===
+CREATE PROCEDURE insertDataBuku(
+    IN_idBuku char(5),
+    IN_idPenerbit varchar(5),
+    IN_judulBuku varchar(100),
+    IN_genreBuku varchar(50),
+    IN_penulisBuku varchar(100),
+    IN_tahunRilis varchar(4),
+    IN_statusBuku Boolean
+)
+BEGIN
+    INSERT INTO buku
+    VALUES(IN_idBuku, IN_idPenerbit, IN_judulBuku, IN_genreBuku, IN_penulisBuku, IN_tahunRilis, IN_statusBuku);
+END;
+
+CALL insertDataBuku('20001', '78901', 'Norwegian Wood', 'Bildungsroman', 'Haruki Murakami', '1987', '0');
+CALL insertDataBuku('20002', '78902', 'All The Bright Places', 'Young Adult Realistic fiction', 'Jennifer Niven', '2015', '0');
+CALL insertDataBuku('20003', '78901', 'Negeri Para Bedebah', 'Fiksi', 'Tere Liye', '2012', '0');
+CALL insertDataBuku('20004', '78903', 'Looking For Alaska', 'Young Adult Realistic Fiction', 'John Green', '2005', '1');
+
+CREATE PROCEDURE updateDataBuku (
+	IN p_idBuku varchar(5),
+   	IN up_statusBuku Boolean
+)
+BEGIN
+	UPDATE buku set STATUS_BUKU = up_statusBuku
+    	WHERE ID_BUKU = p_idBuku;
+END;
+
+CALL updateDataBuku('20001', '1');
+
+CREATE PROCEDURE deleteDataBuku(
+	dr_idBuku varchar(5)
+)
+BEGIN
+	DELETE from buku
+	where ID_BUKU = dr_idBuku;
+END;
+
+CREATE PROCEDURE showDataBuku( 
+    IN in_idBuku varchar(5) 
+) 
+BEGIN 
+	SELECT ID_BUKU, ID_PENERBIT, JUDUL_BUKU, GENRE_BUKU, PENULIS_BUKU, TAHUN_RILIS, STATUS_BUKU from buku 
+    WHERE ID_BUKU = in_idBuku; 
+END;
+
+CALL showDataBuku('20004');
+
+CREATE PROCEDURE showStatusBuku( 
+    IN in_idBuku varchar(5) 
+) 
+BEGIN 
+	SELECT STATUS_BUKU from buku 
+    WHERE ID_BUKU = in_idBuku; 
+END;
+
+===Peminjaman===
+CREATE PROCEDURE insertDataPeminjaman(
+    IN_idPeminjaman varchar(5),
+    IN_idAnggota varchar(5),
+    IN_idBuku varchar(5),
+    IN_idPetugas varchar(5),
+    IN_borrowedDate Date,
+    IN_expiredDate Date,
+    IN_returnDate Date
+)
+BEGIN
+    INSERT INTO peminjaman
+    VALUES(IN_idPeminjaman, IN_idAnggota, IN_idBuku, IN_idPetugas, IN_borrowedDate, IN_expiredDate, IN_returnDate);
+END;
+
+CALL insertDataPeminjaman('00001', '21003', '20001', '19002', '2021-03-28', '2021-04-04', '2021-04-01');
+CALL insertDataPeminjaman('00002', '21002', '20002', '19001', '2021-03-30', '2021-04-06', '2021-04-03');
+CALL insertDataPeminjaman('00003', '21001', '20001', '19003', '2021-04-01', '2021-04-08', '2021-04-05');
+
+CREATE PROCEDURE updateDataPeminjaman (
+	IN p_idPeminjaman varchar(5),
+   	IN up_expiredDate Date
+)
+BEGIN
+	UPDATE peminjaman set EXPIRED_DATE = up_expiredDate
+    	WHERE ID_PEMINJAMAN = p_idPeminjaman;
+END;
+
+CREATE PROCEDURE updateID_Buku_Peminjaman (
+	IN p_idPeminjaman varchar(5),
+   	IN up_ID_Buku varchar(5)
+)
+BEGIN
+	UPDATE peminjaman set ID_BUKU = up_ID_Buku
+    	WHERE ID_PEMINJAMAN = p_idPeminjaman;
+END;
+
+CALL updateID_Buku_Peminjaman('00003', '20003');
+
+CREATE PROCEDURE deleteDataPeminjaman(
+	dr_idPeminjaman varchar(5)
+)
+BEGIN
+	DELETE from peminjaman
+	where ID_PEMINJAMAN = dr_idPeminjaman;
+END;
+
+CREATE PROCEDURE showDataPeminjaman( 
+    IN in_idPeminjaman varchar(5) 
+) 
+BEGIN 
+    SELECT ID_PEMINJAMAN, ID_ANGGOTA, ID_BUKU, ID_PETUGAS, BORROWED_DATE, EXPIRED_DATE, RETURN_DATE from peminjaman 
+    WHERE ID_PEMINJAMAN = in_idPeminjaman; 
+END;
+
+CALL showDataPeminjaman('00003');

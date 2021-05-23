@@ -1,0 +1,97 @@
+=====INSERT SP=====
+-Pembuatan:
+CREATE PROCEDURE SP_INSERT_TABLE(
+    IN TBL VARCHAR(50),
+    IN VAL TEXT
+)
+BEGIN
+    SET @SQL = CONCAT("INSERT INTO ", TBL, " VALUES (", VAL, ");");
+    PREPARE STAT FROM @SQL;
+    EXECUTE STAT;
+END
+
+-Pemanggilan:
+1. Anggota
+CALL SP_INSERT_TABLE("anggota", "'21004', 'Gojou Satoru', 'Jl. Dukun RT. 6 Kel. 6 Malang, Jawa Timur', 'gojouthegod@gmail.com', '083129216666', '2021-05-06', '2022-05-06'");
+
+2. Penerbit
+CALL SP_INSERT_TABLE("penerbit", "'78904', 'Penerbit Puspa Swara', 'Perumahan Jati Jajar Blok D12 No.1 Cimanggis Jawa Barat 16452'");
+
+3. Petugas
+CALL SP_INSERT_TABLE("petugas", "'19004', 'Ryomen Sukuna'");
+
+4. Buku
+CALL SP_INSERT_TABLE("buku", "'20005', '78904', 'Pulang', 'Historical Fiction', 'Leila S. Chudori', '2012', '1'");
+
+5. Peminjaman
+CALL SP_INSERT_TABLE("peminjaman", "'00004', '21004', '20004', '19004', '2021-05-06', '2021-05-13', '2021-05-08'");
+
+
+
+=====UPDATE SP=====
+-Pembuatan:
+CREATE PROCEDURE SP_UPDATE_TABLE (
+     IN TBL VARCHAR(50),	
+     IN COL_PK VARCHAR(50),	
+     IN VAL_PK VARCHAR(50),	
+     IN COL_DAT TEXT		
+)
+BEGIN
+     SET @SQL = CONCAT("UPDATE ", TBL, " SET ", COL_DAT, " WHERE ", COL_PK, "=", VAL_PK);
+     PREPARE STAT FROM @SQL;
+     EXECUTE STAT;
+END;
+
+-Pemanggilan:
+1. Anggota
+CALL SP_UPDATE_TABLE("anggota", "ID_ANGGOTA", "21001", "MEMBERSHIP_START_DATE = '2021-01-01', MEMBERSHIP_EXPIRED_DATE = '2022-01-01'");
+CALL SP_UPDATE_TABLE("anggota", "ID_ANGGOTA", "21002", "MEMBERSHIP_START_DATE = '2021-02-10', MEMBERSHIP_EXPIRED_DATE = '2022-02-10'");
+
+2. Penerbit
+CALL SP_UPDATE_TABLE("penerbit", "ID_PENERBIT", "78903", "ALAMAT_PENERBIT = 'Jl. Jagakarsa Raya no. 40 Rt 07/04
+Jagakarsa, Jakarta Selatan, 12620'");
+
+3. Petugas
+CALL SP_UPDATE_TABLE("petugas", "ID_PETUGAS", "19002", "NAMA_PETUGAS = 'Eren Yeager'");
+
+4. Buku
+CALL SP_UPDATE_TABLE("buku", "ID_BUKU", "20001", "STATUS_BUKU = '1'");
+CALL SP_UPDATE_TABLE("buku", "ID_BUKU", "20002", "GENRE_BUKU = 'Young Adult Realistic Fiction', STATUS_BUKU = '1'");
+CALL SP_UPDATE_TABLE("buku", "ID_BUKU", "20003", "STATUS_BUKU = '1'");
+CALL SP_UPDATE_TABLE("buku", "ID_BUKU", "20004", "STATUS_BUKU = '0'");
+CALL SP_UPDATE_TABLE("buku", "ID_BUKU", "20005", "ID_PENERBIT = '78902'");
+
+5. Peminjaman
+CALL SP_UPDATE_TABLE("peminjaman", "ID_PEMINJAMAN", "00004", "ID_PETUGAS = '19003', RETURN_DATE = '2021-05-10'");
+
+
+
+=====TAMPILKAN SP=====
+-Pembuatan
+CREATE PROCEDURE SP_SHOW_TABLE (
+     IN COL_DAT TEXT,	
+     IN TBL VARCHAR(50),	
+     IN COL_PK VARCHAR(50),	
+     IN VAL_PK VARCHAR(50)		
+)
+BEGIN
+     SET @SQL = CONCAT("SELECT ", COL_DAT, " FROM ", TBL, " WHERE ", COL_PK, "=", VAL_PK);
+     PREPARE STAT FROM @SQL;
+     EXECUTE STAT;
+END;
+
+CREATE PROCEDURE SP_SHOW_ALL_TABLE (
+     IN TBL VARCHAR(50),	
+     IN COL_PK VARCHAR(50),	
+     IN VAL_PK VARCHAR(50)		
+)
+BEGIN
+     SET @SQL = CONCAT("SELECT * FROM ", TBL, " WHERE ", COL_PK, "=", VAL_PK);
+     PREPARE STAT FROM @SQL;
+     EXECUTE STAT;
+END;
+
+-Pemanggilan:
+1. Anggota
+CALL SP_SHOW_TABLE("ID_ANGGOTA, NAMA_ANGGOTA, ALAMAT_ANGGOTA, EMAIL_ANGGOTA", "anggota", "ID_ANGGOTA", "'21004'");
+CALL SP_SHOW_ALL_TABLE("anggota", "ID_ANGGOTA", "'21004'");
