@@ -23,7 +23,11 @@
 	<!-- ============================= CUKUP COPY PASTE CODE DIDALAM KOTAK DI BAWAH DAN ISI DENGAN NAMA TABEL SAJA ============================================= -->		
 	<!--    <li><a href="<?php echo base_url();?>index.php/myController/tampil/...ISI DENGAN NAMA TABEL...."> Data ....ISI DENGAN NAMA TABEL .....  </a></li>       -->
 	<!-- ======================================================================================================================================================= -->
-			<li><a href="<?php echo base_url();?>index.php/myController/tampil/pembeli"> Data Pembeli</a></li>
+			<li><a href="<?php echo base_url();?>index.php/myController/tampil/anggota"> Data Anggota</a></li>
+			<li><a href="<?php echo base_url();?>index.php/myController/tampil/buku"> Data Buku</a></li>
+			<li><a href="<?php echo base_url();?>index.php/myController/tampil/peminjaman"> Data Peminjaman</a></li>
+			<li><a href="<?php echo base_url();?>index.php/myController/tampil/penerbit"> Data Penerbit</a></li>
+			<li><a href="<?php echo base_url();?>index.php/myController/tampil/petugas"> Data Petugas</a></li>
 			<li><a href="<?php echo base_url();?>index.php/about">About</a></li>
 			</ul>
 		</div>
