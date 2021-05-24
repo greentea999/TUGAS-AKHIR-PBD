@@ -14,7 +14,7 @@
 <nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
-			<a href="#" class="navbar-brand">MySQL Stored Procedure</a>
+			<a href="#" class="navbar-brand">LIBRARY CERDAS</a>
 		</div>
 			
 		<div id="navbar" class="collapse navbar-collapse">
