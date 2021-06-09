@@ -27,7 +27,7 @@ class About extends CI_Controller {
 		<br/>
 		fayzaaa_@student.ub.ac.id
 		</br>
-
+		hanifaputri@student.ub.ac.id
 		</p>	
 		';
 
